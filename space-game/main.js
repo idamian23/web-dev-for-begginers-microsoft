@@ -38,18 +38,39 @@ const swiper = new Swiper(".swiper", {
     slidesPerView: 1,
 });
 
-document.onkeydown = checkKey;
-
-function checkKey(e) {
-    e = e || window.Event;
-
-    if (e.keyCode == "38") console.log("up");
-    if (e.keyCode == "40") console.log("down");
-    if (e.keyCode == "37") console.log("left");
-    if (e.keyCode == "39") console.log("right");
-}
-
+//CANVAS
 let canvas = document.getElementById("myCanvas");
 let ctx = canvas.getContext("2d");
-ctx.fillStyle = "red";
-ctx.fillRect(0, 0, 200, 200);
+ctx.fillStyle = "black";
+ctx.fillRect(0, 0, 1024, 768);
+
+const MONSTER_TOTAL = 5;
+const MONSTER_WIDTH = MONSTER_TOTAL * 98;
+const START_X = (canvas.width - MONSTER_WIDTH) / 2;
+const STOP_X = START_X + MONSTER_WIDTH;
+
+function loadAsset(path) {
+    return new Promise((resolve) => {
+        const img = new Image();
+        img.src = path;
+        img.onload = () => {
+            // image loaded and ready to be used
+            resolve(img);
+        };
+    });
+}
+
+async function run() {
+    const heroImg = await loadAsset("./assets/img/player.png");
+    const monsterImg = await loadAsset("./assets/img/enemyShip.png");
+
+    ctx.drawImage(heroImg, canvas.width / 2 - 45, canvas.height - canvas.height / 4);
+
+    for (let x = START_X; x < STOP_X; x += 98) {
+        for (let y = 0; y < 50 * 5; y += 50) {
+            ctx.drawImage(monsterImg, x, y);
+        }
+    }
+}
+
+run();
