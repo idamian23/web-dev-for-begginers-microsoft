@@ -1,0 +1,33 @@
+@import "node_modules/bootstrap/scss/bootstrap";
+
+.container-image {
+    height: 100vh;
+}
+
+.test-image {
+    position: absolute;
+    width: 10rem;
+    height: 10rem;
+
+}
+
+.swiper {
+    .swiper-wrapper {
+        img {
+            display: flex;
+            margin: 2rem auto;
+            width: 50rem;
+            height: 25rem;
+        }
+    }
+
+    .swiper-pagination {
+        margin-top: 1rem;
+    }
+
+}
+
+#myCanvas {
+    width: 100vw;
+    height: 100vh;
+}
